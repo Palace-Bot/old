@@ -1,0 +1,3 @@
+org.github.palace.bot.core.EventDispatcher = \
+org.github.palace.bot.core.handler.GroupEventHandler \
+org.github.palace.bot.core.handler.BotInvitedJoinGroupRequestHandler \
