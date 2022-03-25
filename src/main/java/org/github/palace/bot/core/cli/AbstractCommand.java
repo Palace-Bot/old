@@ -1,4 +1,4 @@
-package org.github.palace.bot.core.command;
+package org.github.palace.bot.core.cli;
 
 import net.mamoe.mirai.message.code.MiraiCode;
 import net.mamoe.mirai.message.data.*;
@@ -47,10 +47,7 @@ public abstract class AbstractCommand implements ICommand {
         messageTypeMap.put(MessageType.IMAGES, chain.stream().filter(Image.class::isInstance).collect(Collectors.toList()));
     }
 
-    public void parseCommandLine(String commandLine){
 
-    }
-
-    protected abstract void parseCommand(PlainText plainText);
+    protected abstract void parseCommandLine(String commandLine);
 
 }

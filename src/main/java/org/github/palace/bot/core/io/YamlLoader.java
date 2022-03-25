@@ -1,4 +1,4 @@
-package org.github.palace.bot.property;
+package org.github.palace.bot.core.io;
 
 import org.yaml.snakeyaml.Yaml;
 

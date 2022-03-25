@@ -5,11 +5,12 @@ import net.mamoe.mirai.contact.Group;
 import net.mamoe.mirai.contact.NormalMember;
 import net.mamoe.mirai.event.events.GroupMessageEvent;
 import net.mamoe.mirai.message.data.*;
+import org.github.palace.bot.core.cli.CommandLine;
+import org.github.palace.bot.core.collection.GroupContextMap;
+import org.github.palace.bot.core.utils.MiraiCodeUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -19,55 +20,55 @@ import java.util.Optional;
 public class GroupEventHandler implements EventHandler<GroupMessageEvent> {
     private static final Logger LOGGER = LoggerFactory.getLogger(GroupEventHandler.class);
 
+    // 我也不懂是不是线程安全
+    /**
+     * 保留用户命令上下文
+     * key: 群号, value: {key: qq, value: 最近聊天记录}
+     */
+    private final GroupContextMap groupContextMap = new GroupContextMap();
+
     @Override
     public void onEvent(GroupMessageEvent event) {
         Group subject = event.getSubject();
         MessageChain chain = event.getMessage();
 
         MessageSource messageSource = (MessageSource) chain.get(0);
-        List<At> atList = new ArrayList<>();
-        List<PlainText> plainTextList = new ArrayList<>();
-        List<Face> faceList = new ArrayList<>();
-        List<Image> imageList = new ArrayList<>();
 
-        for (int i = 1; i < chain.size(); i++) {
-            SingleMessage message = chain.get(i);
+        String miraiCode = chain.serializeToMiraiCode();
+        LOGGER.info("[miraiCode]: {}", miraiCode);
+        LOGGER.error("[miraiCode]: {}", miraiCode);
+        // 回复用户
+        NormalMember normalMember = Optional
+                .ofNullable(subject.get(messageSource.getFromId()))
+                .orElseThrow(RuntimeException::new);
 
-            if (message instanceof At) {
-                atList.add((At) message);
-            }
-            if (message instanceof PlainText) {
-                plainTextList.add((PlainText) message);
-            }
-            if (message instanceof Face) {
-                faceList.add((Face) message);
-            }
-            if (message instanceof Image) {
-                imageList.add((Image) message);
-            }
+        // at机器人
+        if (MiraiCodeUtil.isAtMe(miraiCode)) {
+            CommandLine commandLine = new CommandLine(chain.get(2).contentToString().trim(), CommandLine.State.NEW);
+            // TODO 处理命令前
+            groupContextMap.put(subject.getId(), messageSource.getFromId(), commandLine);
+            subject.sendMessage(new At(normalMember.getId()).plus(" ").plus("请输入y/n:"));
+            // TODO 处理命令后
+            commandLine.setState(CommandLine.State.PREPARE);
         }
 
-        boolean atMe = false;
-        for (At at : atList) {
-            if (at.contentToString().equals("@1515023757")) {
-                atMe = true;
-                break;
+        CommandLine commandLine = null;
+        try {
+            commandLine = groupContextMap.get(subject.getId(), messageSource.getFromId(), CommandLine.State.PREPARE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // TODO
+        if (commandLine != null) {
+            if (chain.get(1).contentToString().trim().equals("y")) {
+                subject.sendMessage(new At(normalMember.getId()).plus(" ").plus(commandLine.getName()).plus(" 命令正在处理中..."));
+                subject.sendMessage(new At(normalMember.getId()).plus(" ").plus(commandLine.getName()).plus(" 已结束..."));
+                commandLine.setState(CommandLine.State.FINISH);
+            } else if (chain.get(1).contentToString().trim().equals("n")) {
+                subject.sendMessage(new At(normalMember.getId()).plus(" ").plus(commandLine.getName()).plus(" 命令已拒绝"));
+                commandLine.setState(CommandLine.State.FINISH);
             }
         }
-
-        // TODO at bot
-        if (atMe) {
-            // 回复用户
-            NormalMember normalMember = Optional
-                    .ofNullable(subject.get(messageSource.getFromId()))
-                    // TODO
-                    .orElseThrow(RuntimeException::new);
-
-            // 匹配命令
-        } else {
-            // TODO 普通消息，插入数据库
-        }
-
     }
 
     @Override

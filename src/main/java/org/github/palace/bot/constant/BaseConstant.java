@@ -1,7 +1,7 @@
 package org.github.palace.bot.constant;
 
 import org.github.palace.bot.MainApplication;
-import org.github.palace.bot.property.YamlLoader;
+import org.github.palace.bot.core.io.YamlLoader;
 
 import static org.github.palace.bot.utils.TypeUtil.cast;
 

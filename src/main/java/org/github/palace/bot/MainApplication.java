@@ -19,6 +19,7 @@ public class MainApplication {
 
         EventDispatcher eventDispatcher = new EventDispatcher();
         eventDispatcher.start();
+
     }
 
 }
