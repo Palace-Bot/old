@@ -5,7 +5,7 @@ import net.mamoe.mirai.message.data.MessageSource;
 import org.github.palace.bot.MainApplication;
 import org.github.palace.bot.constant.CommandConfig;
 import org.github.palace.bot.core.cli.Command;
-import org.github.palace.bot.core.utils.JSONUtil;
+import org.github.palace.bot.utils.JSONUtil;
 
 import java.io.*;
 import java.util.HashMap;
