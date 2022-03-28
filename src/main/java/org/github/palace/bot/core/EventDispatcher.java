@@ -40,10 +40,6 @@ public class EventDispatcher {
     public void start() {
         for (EventHandler<Event> handler : handlers) {
             Listener<Event> eventListener = GlobalEventChannel.INSTANCE
-                    .exceptionHandler(e -> {
-                        LOGGER.error(e.getMessage());
-                        return null;
-                    })
                     .subscribeAlways(handler.getHandlerEvent(), handler::onEvent);
             listeners.add(eventListener);
         }
