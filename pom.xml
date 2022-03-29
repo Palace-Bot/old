@@ -29,6 +29,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.5.9</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
             <version>1.30</version>
@@ -71,11 +77,16 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>2.17.2</version>
+            <groupId>net.mamoe</groupId>
+            <artifactId>mirai-logging-slf4j</artifactId>
+            <version>2.9.1</version>
         </dependency>
 
+        <dependency>
+            <groupId>net.mamoe</groupId>
+            <artifactId>mirai-logging-slf4j-logback</artifactId>
+            <version>2.9.1</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -97,11 +108,18 @@
         </plugins>
         <resources>
             <resource>
-                <directory>src/main/resources</directory>
+                <directory>src/main/resources/META-INF</directory>
                 <includes>
                     <include>**</include>
                 </includes>
                 <targetPath>META-INF</targetPath>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**</include>
+                </includes>
+                <targetPath>/</targetPath>
             </resource>
         </resources>
 

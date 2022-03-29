@@ -10,8 +10,13 @@ import org.github.palace.bot.core.cli.CommandLineHelper;
 import org.github.palace.bot.core.cli.manager.CommandManager;
 import org.github.palace.bot.core.cli.manager.DefaultCommandManager;
 import org.github.palace.bot.core.utils.MiraiCodeUtil;
+import org.github.palace.bot.data.MybatisContext;
+import org.github.palace.bot.data.entity.MessageDO;
+import org.github.palace.bot.data.mapper.MessageMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Date;
 
 /**
  * @author JHY
@@ -72,8 +77,11 @@ public class GroupEventHandler implements EventHandler<GroupMessageEvent> {
             return;
         }
 
-        // TODO 可能考虑插入数据库
-        System.out.println();
+        MessageMapper messageMapper = MybatisContext.instance.get(MessageMapper.class);
+        messageMapper.insert(subject.getId(), MessageDO.builder()
+                .memberId(messageSource.getFromId())
+                .message(miraiCode)
+                .createAt(new Date()).build());
     }
 
     @Override

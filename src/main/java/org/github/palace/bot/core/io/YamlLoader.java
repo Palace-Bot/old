@@ -20,7 +20,7 @@ public final class YamlLoader {
      * The location to look for factories.
      * <p>Can be present in multiple JAR files.
      */
-    public static final String FACTORIES_RESOURCE_LOCATION = "META-INF/application.yml";
+    public static final String FACTORIES_RESOURCE_LOCATION = "application.yml";
 
     private static final Map<ClassLoader, Map<String, Object>> CACHE = new ConcurrentHashMap<>();
 
