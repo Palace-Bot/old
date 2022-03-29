@@ -1,6 +1,5 @@
 package org.github.palace.bot.core;
 
-import kotlin.Unit;
 import net.mamoe.mirai.event.Event;
 import net.mamoe.mirai.event.GlobalEventChannel;
 import net.mamoe.mirai.event.Listener;
@@ -41,10 +40,7 @@ public class EventDispatcher {
     public void start() {
         for (EventHandler<Event> handler : handlers) {
             Listener<Event> eventListener = GlobalEventChannel.INSTANCE
-                    .exceptionHandler(e -> {
-                        LOGGER.error(e.getMessage());
-                        return Unit.INSTANCE;
-                    })
+                    .exceptionHandler(new EventExceptionHandler(LOGGER))
                     .subscribeAlways(handler.getHandlerEvent(), handler::onEvent);
             listeners.add(eventListener);
         }
