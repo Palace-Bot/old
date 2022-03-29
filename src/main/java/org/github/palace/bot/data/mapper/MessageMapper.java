@@ -2,10 +2,12 @@ package org.github.palace.bot.data.mapper;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.github.palace.bot.data.entity.MessageDO;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -35,6 +37,9 @@ public interface MessageMapper {
 
     @Insert("insert into t_message_${groupId} (member_id, message, create_at) values (#{memberId}, #{message}, #{createAt})")
     void insert(MessageDO message);
+
+    @Select("select message from t_message_${groupId} where member_id = #{memberId} ")
+    List<String> selectMessageByGroupIdAndMemberId(@Param("groupId") Long groupId, @Param("memberId") Long memberId);
 
     @Select("select sql from sqlite_master where type = 'table' and name = #{tableName}")
     String selectCreateTable(String tableName);

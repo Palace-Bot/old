@@ -1,5 +1,6 @@
 package org.github.palace.bot.core.handler;
 
+import net.mamoe.mirai.contact.Contact;
 import org.github.palace.bot.core.EventHandler;
 import net.mamoe.mirai.contact.Group;
 import net.mamoe.mirai.event.events.GroupMessageEvent;
@@ -13,10 +14,13 @@ import org.github.palace.bot.core.utils.MiraiCodeUtil;
 import org.github.palace.bot.data.MybatisContext;
 import org.github.palace.bot.data.entity.MessageDO;
 import org.github.palace.bot.data.mapper.MessageMapper;
+import org.github.palace.bot.utils.WordCloudUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * @author JHY
@@ -41,6 +45,10 @@ public class GroupEventHandler implements EventHandler<GroupMessageEvent> {
         if (MiraiCodeUtil.isAtMe(miraiCode)) {
             Command command = commandManager.matchCommand(chain.get(2).contentToString().trim());
             if (command != null) {
+                List<String> texts = MybatisContext.instance.get(MessageMapper.class).selectMessageByGroupIdAndMemberId(subject.getId(), messageSource.getFromId());
+                Image i = Contact.uploadImage(Objects.requireNonNull(subject.get(messageSource.getFromId())), WordCloudUtil.gen(texts), "png");
+                subject.sendMessage(new At(messageSource.getFromId()).plus(i));
+
                 CommandLine commandLine = commandLineHelper.put(messageSource, command);
 
                 Exception exception = null;
