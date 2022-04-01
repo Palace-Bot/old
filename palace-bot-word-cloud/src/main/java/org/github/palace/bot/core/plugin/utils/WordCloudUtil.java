@@ -1,4 +1,4 @@
-package org.github.palace.bot.plugin.utils;
+package org.github.palace.bot.core.plugin.utils;
 
 import com.kennycason.kumo.*;
 import com.kennycason.kumo.bg.PixelBoundryBackground;
