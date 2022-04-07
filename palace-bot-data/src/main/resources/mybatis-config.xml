@@ -17,7 +17,8 @@
     </environments>
 
     <mappers>
-        <mapper class="org.github.palace.bot.data.mapper.MessageMapper"/>
+        <mapper class="org.github.palace.bot.data.common.CommonMapper"/>
+        <mapper class="org.github.palace.bot.data.message.mapper.MessageMapper"/>
     </mappers>
 
 </configuration>

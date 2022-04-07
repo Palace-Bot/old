@@ -16,7 +16,7 @@ import java.util.Map;
  */
 public class MybatisContext {
 
-    public static final MybatisContext instance = new MybatisContext("mybatis-config.xml");
+    public static final MybatisContext INSTANCE = new MybatisContext("mybatis-config.xml");
 
     private final Map<Class<?>, Object> instancesMap;
     public final SqlSession sqlSession;

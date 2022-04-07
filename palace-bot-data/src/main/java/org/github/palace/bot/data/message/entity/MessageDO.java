@@ -1,4 +1,4 @@
-package org.github.palace.bot.data.entity;
+package org.github.palace.bot.data.message.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,8 +20,6 @@ public class MessageDO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer id;
-
-    private Long groupId;
 
     private Long memberId;
 
