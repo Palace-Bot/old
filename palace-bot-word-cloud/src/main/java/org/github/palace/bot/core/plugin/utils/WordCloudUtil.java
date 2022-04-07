@@ -18,13 +18,13 @@ import java.util.*;
 
 /**
  * 词云工具类
- * TODO 临时放在这里，后期拆分成项目打包jar
  *
  * @author JHY
  * @date 2022/3/29 15:00
  */
 public class WordCloudUtil {
 
+    private static final Random RANDOM = new Random();
     private static final List<String> BACKGROUND = new ArrayList<>();
 
     static {
@@ -45,7 +45,7 @@ public class WordCloudUtil {
         }
     }
 
-    public static File gen(List<String> texts) {
+    public static synchronized File gen(List<String> texts) {
         //建立词频分析器，设置词频，以及词语最短长度，此处的参数配置视情况而定即可
         FrequencyAnalyzer frequencyAnalyzer = new FrequencyAnalyzer();
         // 返回字数限制
@@ -63,7 +63,7 @@ public class WordCloudUtil {
         // 词与词的间距
         wordCloud.setPadding(5);
         // 设置中文字体样式
-        Font font = new Font("STSong-Light", 2, 20);
+        Font font = new Font("STSong-Light", Font.ITALIC, 20);
         // 设置背景颜色
         wordCloud.setBackgroundColor(new Color(255, 255, 255));
 
@@ -71,9 +71,7 @@ public class WordCloudUtil {
         // 生成字体
         wordCloud.setKumoFont(new KumoFont(font));
         try {
-            Random random = new Random();
-            int i = random.nextInt(BACKGROUND.size());
-            wordCloud.setBackground(new PixelBoundryBackground(BACKGROUND.get(i)));
+            wordCloud.setBackground(new PixelBoundryBackground(BACKGROUND.get(RANDOM.nextInt(BACKGROUND.size()))));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
