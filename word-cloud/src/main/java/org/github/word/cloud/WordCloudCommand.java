@@ -1,4 +1,4 @@
-package org.github.palace.bot.core.plugin;
+package org.github.word.cloud;
 
 import net.mamoe.mirai.message.data.At;
 import net.mamoe.mirai.message.data.Image;
@@ -8,7 +8,7 @@ import net.mamoe.mirai.utils.ExternalResource;
 import org.github.palace.bot.core.annotation.CommandHandler;
 import org.github.palace.bot.core.cli.CommandSender;
 import org.github.palace.bot.core.cli.SimpleCommand;
-import org.github.palace.bot.core.plugin.utils.WordCloudUtil;
+import org.github.word.cloud.utils.WordCloudUtil;
 import org.github.palace.bot.data.MybatisContext;
 import org.github.palace.bot.data.message.mapper.MessageMapper;
 

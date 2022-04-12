@@ -1,4 +1,4 @@
-package org.github.palace.bot.core.plugin.utils;
+package org.github.word.cloud.utils;
 
 import com.kennycason.kumo.*;
 import com.kennycason.kumo.bg.PixelBoundryBackground;

@@ -1,4 +1,6 @@
-package org.github.palace.bot.core.plugin;
+package org.github.word.cloud;
+
+import org.github.palace.bot.core.plugin.Plugin;
 
 /**
  * @author JHY
