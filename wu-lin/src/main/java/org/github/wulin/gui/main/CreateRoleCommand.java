@@ -7,6 +7,7 @@ import org.github.palace.bot.core.cli.CommandSender;
 import org.github.palace.bot.core.cli.CommandSession;
 import org.github.palace.bot.core.cli.SimpleCommand;
 import org.github.wulin.context.PlayerContext;
+import org.github.wulin.core.map.MapData;
 import org.github.wulin.core.person.Player;
 
 import java.util.Random;
@@ -34,8 +35,9 @@ public class CreateRoleCommand extends SimpleCommand {
         session.finish();
 
         Player player = new Player(plainText.contentToString());
-        Random random = new Random();
-        player.init(random.nextInt(10), random.nextInt(10), random.nextInt(10));
+        player.allocateProperty();
+        // 初始化地图
+        player.initMap(MapData.get("第一关"));
         PlayerContext.putPlayer(commandSender.getUser().getId(), player);
     }
 

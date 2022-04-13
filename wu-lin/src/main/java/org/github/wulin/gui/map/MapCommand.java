@@ -5,6 +5,9 @@ import org.github.palace.bot.core.annotation.CommandHandler;
 import org.github.palace.bot.core.cli.CommandSender;
 import org.github.palace.bot.core.cli.CommandSession;
 import org.github.palace.bot.core.cli.SimpleCommand;
+import org.github.wulin.context.PlayerContext;
+import org.github.wulin.core.person.Player;
+import org.github.wulin.utils.StringPrintUtil;
 
 /**
  * @author jihongyuan
@@ -18,7 +21,9 @@ public class MapCommand extends SimpleCommand {
 
     @CommandHandler
     public void handler(CommandSender commandSender, PlainText plainText, CommandSession session) {
-
+        Player player = PlayerContext.getPlayer(commandSender.getUser().getId());
+        StringBuilder sb = StringPrintUtil.printfMap(player);
+        commandSender.sendMessage(sb.toString());
     }
 
 }

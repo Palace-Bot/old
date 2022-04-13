@@ -11,13 +11,13 @@ import java.util.Map;
  */
 public class PlayerContext {
 
-    private static final Map<Long, Player> idPayer = new HashMap<>(16);
+    private static final Map<Long, Player> ID_PAYER = new HashMap<>(16);
 
     public static Player getPlayer(Long id) {
-        return idPayer.get(id);
+        return ID_PAYER.get(id);
     }
 
     public static void putPlayer(Long id, Player player) {
-        idPayer.put(id, player);
+        ID_PAYER.put(id, player);
     }
 }

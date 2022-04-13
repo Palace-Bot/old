@@ -2,7 +2,6 @@ package org.github.wulin;
 
 import org.github.palace.bot.core.plugin.Plugin;
 import org.github.wulin.gui.MainCommand;
-import org.github.wulin.gui.menu.StatusCommand;
 
 /**
  * @author jihongyuan

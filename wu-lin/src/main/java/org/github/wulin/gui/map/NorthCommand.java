@@ -5,6 +5,9 @@ import org.github.palace.bot.core.annotation.CommandHandler;
 import org.github.palace.bot.core.cli.CommandSender;
 import org.github.palace.bot.core.cli.CommandSession;
 import org.github.palace.bot.core.cli.SimpleCommand;
+import org.github.wulin.context.PlayerContext;
+import org.github.wulin.core.person.Player;
+import org.github.wulin.utils.StringPrintUtil;
 
 /**
  * 北指令
@@ -20,7 +23,14 @@ public class NorthCommand extends SimpleCommand {
 
     @CommandHandler
     public void handler(CommandSender commandSender, PlainText plainText, CommandSession session) {
-        session.finish();
+        Player player = PlayerContext.getPlayer(commandSender.getUser().getId());
+        int[] currentMapIndex = player.getCurrentMapIndex();
+        if(currentMapIndex[0] - 1 > 0){
+            currentMapIndex[0] = currentMapIndex[0] - 1;
+            player.setCurrentMapIndex(currentMapIndex);
+        }
+        StringBuilder sb = StringPrintUtil.printfMap(player);
+        commandSender.sendMessage(sb.toString());
     }
 
 }
