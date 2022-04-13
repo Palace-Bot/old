@@ -44,4 +44,16 @@ public interface MessageMapper {
     @Select("select message from t_message_${groupId} where member_id = #{memberId}")
     List<String> selectMessages(@Param("groupId") Long groupId, @Param("memberId") Long memberId);
 
+    /**
+     * 查询指定 群号 和 成员号 消息
+     *
+     * @param groupId  群号
+     * @param memberId 成员号
+     * @param start    开始时间
+     * @param end      结束时间
+     * @return 消息列表
+     */
+    @Select("select message from t_message_${groupId} where member_id = #{memberId} and create_at >= #{start} and create_at <= #{end}")
+    List<String> selectMessagesByCreateAt(@Param("groupId") Long groupId, @Param("memberId") Long memberId, @Param("start") Long start, @Param("end") Long end);
+
 }
