@@ -7,11 +7,11 @@
 一个支持插件拓展的QQ机器人  
 
 # 开始
-- app: 项目启动,配置
-- core: 核心处理逻辑
-- data: 数据库存储
-- example: word-cloud、wu-lin
-
+- app: 项目启动,配置  
+- core: 核心处理逻辑  
+- data: 数据库存储  
+- example: word-cloud、wu-lin  
+- 开发计划: 看心情  
 # 赞助
 **无**  
 
