@@ -4,7 +4,7 @@ import net.mamoe.mirai.message.data.PlainText;
 import org.github.palace.bot.core.annotation.CommandHandler;
 import org.github.palace.bot.core.cli.CommandSender;
 import org.github.palace.bot.core.cli.CommandSession;
-import org.github.palace.bot.core.cli.SimpleCommand;
+import org.github.palace.bot.core.plugin.SimpleCommand;
 import org.github.wulin.context.PlayerContext;
 import org.github.wulin.core.person.Player;
 import org.github.wulin.utils.StringPrintUtil;

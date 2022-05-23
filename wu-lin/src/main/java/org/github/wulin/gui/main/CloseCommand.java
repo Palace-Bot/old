@@ -3,7 +3,7 @@ package org.github.wulin.gui.main;
 import org.github.palace.bot.core.annotation.CommandHandler;
 import org.github.palace.bot.core.cli.CommandSender;
 import org.github.palace.bot.core.cli.CommandSession;
-import org.github.palace.bot.core.cli.SimpleCommand;
+import org.github.palace.bot.core.plugin.SimpleCommand;
 
 /**
  * @author jihongyuan

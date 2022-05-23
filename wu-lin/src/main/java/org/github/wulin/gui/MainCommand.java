@@ -2,7 +2,7 @@ package org.github.wulin.gui;
 
 import org.github.palace.bot.core.annotation.CommandHandler;
 import org.github.palace.bot.core.cli.CommandSender;
-import org.github.palace.bot.core.cli.SimpleCommand;
+import org.github.palace.bot.core.plugin.SimpleCommand;
 import org.github.wulin.gui.main.CloseCommand;
 import org.github.wulin.gui.main.CreateRoleCommand;
 import org.github.wulin.gui.main.LoadRoleCommand;
