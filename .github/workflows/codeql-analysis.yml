@@ -21,8 +21,8 @@ on:
       - '**/*.md'
       - '**/*.txt'
     paths:
-      - palace-bot-core/src
-      - palace-bot-data/src
+      - 'palace-bot-core/src/**'
+      - 'palace-bot-data/src/**'
   schedule:
     - cron: '39 18 * * 1'
 
